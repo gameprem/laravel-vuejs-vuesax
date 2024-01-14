@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,8 @@ Route::get('/bill-history', function () {
 })->middleware(['auth', 'verified'])->name('bill-history');
 
 Route::middleware('auth')->group(function () {
+    Route::post('/dashboard', [DashboardController::class, 'create'])->name('dashboard.create');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
