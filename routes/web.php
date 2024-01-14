@@ -7,6 +7,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,14 @@ Route::get('/dashboard', function (Request $request) {
     // print($request->user()->getRoleNames());
     // $users = User::role('admin')->get();
     // print($users);
-    return Inertia::render('Dashboard');
+    // print($request->user()->getPermissionsViaRoles());
+    $getRoles = new Collection($request->user()->getRoleNames());
+    $role = 'Admin';
+    if ($getRoles->contains($role)) {
+        return Inertia::render('Admin/Dashboard');
+    }else{
+        return Inertia::render('Dashboard');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/manage-products', function () {
