@@ -29,9 +29,17 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/product', function () {
-    return Inertia::render('Product');
-})->middleware(['auth', 'verified'])->name('product');
+Route::get('/manage-products', function () {
+    return Inertia::render('ManageProducts');
+})->middleware(['auth', 'verified'])->name('manage-products');
+
+Route::get('/summary-of-sales', function () {
+    return Inertia::render('SummaryOfSales');
+})->middleware(['auth', 'verified'])->name('summary-of-sales');
+
+Route::get('/bill-history', function () {
+    return Inertia::render('BillHistory');
+})->middleware(['auth', 'verified'])->name('bill-history');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
