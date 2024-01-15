@@ -39,7 +39,7 @@ Route::get('/dashboard', function (Request $request) {
     if ($getRoles->contains($role)) {
         return Inertia::render('Admin/Dashboard');
     }else{
-        return Inertia::render('Dashboard');
+        return Inertia::render('Member/Dashboard');
     }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
